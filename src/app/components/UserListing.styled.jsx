@@ -10,7 +10,7 @@ export const ListingButton = styled.a`
     margin-bottom: 20px;
     border: 2px solid black;
     color: black;
-    text-decoration: none;
+    text-decoration: none;      
 `;
 
 export const ListingImage = styled.img`

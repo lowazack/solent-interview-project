@@ -2,16 +2,22 @@ import React, { useState, useEffect } from 'react';
 import Search from "Components/Search";
 import axios from "axios";
 import UserListing from "Components/UserListing"
+import {useHistory} from "react-router";
 
 
 const Homepage = () => {
 
     const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [seed, setSeed] = useState('');
+
+    const history = useHistory();
+
 
     useEffect(() => {
         axios.get("https://randomuser.me/api/?results=10")
             .then(res => {
+                setSeed(res.data.info.seed)
                 setUsers(res.data.results)
             })
     }, [])
@@ -24,7 +30,7 @@ const Homepage = () => {
         if (searchTerm === ''){
             return (
                 <>{users.map((user, index) => (
-                    <UserListing user={user} key={index} />
+                    <UserListing user={user} key={index} seed={seed}/>
                 ))}</>
             )
         }
@@ -36,7 +42,7 @@ const Homepage = () => {
 
         return (
             <>{usersArray.map((user, index) => (
-                <UserListing user={user} key={index} />
+                <UserListing user={user} key={index} seed={seed} />
             ))}</>
         )
 

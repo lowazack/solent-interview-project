@@ -7,7 +7,7 @@ import {ListingButton, ListingImage, ListingName, ListingGo} from './UserListing
 
 const UserListing = (props) => {
     return (
-        <ListingButton href={'/seed/id'}>
+        <ListingButton href={`/${props.seed}/${props.user.login.uuid}`}>
             <ListingImage src={props.user.picture.thumbnail} alt={props.user.name.first + ' ' + props.user.name.last}/>
             <ListingName>{props.user.name.first} {props.user.name.last}</ListingName>
             <ListingGo src={SearchIcon} alt="go to profile"/>

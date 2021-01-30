@@ -8,7 +8,7 @@ export default [
         component: Home
     },
     {
-        path: '/:seed/:id',
+        path: '/:seed/:userId',
         component: Profile
     },
 ];

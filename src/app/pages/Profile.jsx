@@ -1,21 +1,51 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import {useParams} from "react-router";
 
-const Profile = () => {
+import Search from "Components/Search";
+import UserProfile from "Components/UserProfile";
 
-    const [users, setUsers] = useState([]);
+const Profile = (props) => {
+    const [user, setUser] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [screenWidth, setScreenWidth] = useState(0)
+
+
+
+    let { seed, userId } = useParams();
 
     useEffect(() => {
-        axios.get("https://randomuser.me/api/?results=10")
+
+        updateScreenWidth()
+
+        window.addEventListener("resize", updateScreenWidth);
+
+        axios.get(`https://randomuser.me/api/?results=10&seed=${seed}`)
             .then(res => {
-                console.log(res.data)
-                setUsers(res.data.results)
+                setUser(res.data.results.filter(user => {
+                    return user.login.uuid === userId
+                })[0]);
             })
+
+        return () => {
+            window.removeEventListener('resize', updateScreenWidth)
+        }
     }, [])
+
+    let updateScreenWidth = () => {
+        setScreenWidth(window.innerWidth)
+    }
+
+    let updateSearchTerm = (value) => {
+        setSearchTerm(value)
+    }
 
     return (
         <>
-          <h1>Profile</h1>
+            { screenWidth > 800 ? <Search searchFunction={updateSearchTerm} /> : null }
+
+            {user !== false ? <UserProfile user={user} /> : null }
+
         </>
     );
 };

@@ -11,7 +11,7 @@ const Search = (props) => {
                 <SearchTitle>Find a member of staff</SearchTitle>
                 <SearchSubTitle>Use the search box to get started</SearchSubTitle>
 
-                <SearchInput>
+                <SearchInput >
                     <input type="text" placeholder={'Start typing'}  onChange={e => {props.searchFunction(e.target.value)}}/>
                     <img src={SearchIcon} alt="search icon"/>
                 </SearchInput>

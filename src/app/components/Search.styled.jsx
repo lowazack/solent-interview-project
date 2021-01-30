@@ -12,9 +12,9 @@ export const SearchCont = styled.div`
     background-position: center -3px;
     
     @media screen and (min-width: 800px){
-    margin-bottom: 80px;
-    padding-bottom: 80px;
-    padding-top: 150px;
+        margin-bottom: 80px;
+        padding-bottom: 80px;
+        padding-top: 150px;
   }
 `;
 
